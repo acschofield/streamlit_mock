@@ -18,6 +18,14 @@ pokemon_catolog = {
         "file": "venusaur.png",
         "type": "Fire Dark",
     },
+    "Charmander": {
+        "file": "charmander.png",
+        "type": "Fire",
+    },
+    "Lumberaxe": {
+        "file": "lumberaxe.png",
+        "type": "Grass",
+    },
 }
 
 

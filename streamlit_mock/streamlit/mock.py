@@ -10,11 +10,20 @@ class Mock:
     def __init__(self):
         self.session_state = DictNoDefault()
         self._results = DictNoDefault()
+        self._results.altair_chart = []
+        self._results.dataframe = []
+        self._results.error = []
         self._results.form = []
+        self._results.header = []
         self._results.image = []
+        self._results.info = []
         self._results.markdown = []
+        self._results.subheader = []
+        self._results.success = []
         self._results.title = []
+        self._results.warning = []
         self._results.widget_labels = []
+        self._results.text = []
         self._results.write = []
 
     def __enter__(self):
@@ -39,7 +48,12 @@ class Mock:
             optional_args = args if args else []
             optional_kwargs = kwargs if kwargs else {}
             on_click(*optional_args, **optional_kwargs)
+        if key:
+            self.session_state[key] = False
         return value
+
+    def altair_chart(self, altair_chart, use_container_width=False):
+        self._results.altair_chart.append(altair_chart)
 
     def button(
         self,
@@ -70,6 +84,9 @@ class Mock:
     def container(self):
         return self
 
+    def dataframe(self, data=None, width=None, height=None):
+        self._results.dataframe.append(data)
+
     def date_input(self, label, value=None, min_value=None, max_value=None, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False):
         return self._handle_changeable(label, key, value, on_change, args, kwargs)
 
@@ -78,6 +95,9 @@ class Mock:
 
     def empty(self):
         return self
+
+    def error(self, body):
+        self._results.error.append(body)
 
     def expander(self, label, expanded=False):
         self._results.widget_labels.append(label)
@@ -101,8 +121,14 @@ class Mock:
         key = "FormSubmitter:" + self._results.form[-1] + "-" + label
         return self._handle_clickable(label, key, on_click, args, kwargs)
 
+    def header(self, body, anchor=None):
+        self._results.header.append(body)
+
     def image(self, image, caption=None, width=None, use_column_width=None, clamp=False, channels="RGB", output_format="auto"):
         self._results.image.append(image)
+
+    def info(self, body):
+        self._results.info.append(body)
 
     def markdown(self, body, unsafe_allow_html=False):
         self._results.markdown.append(body)
@@ -183,8 +209,17 @@ class Mock:
     ):
         return self._handle_changeable(label, key, value, on_change, args, kwargs)
 
+    def success(self, body):
+        self._results.success.append(body)
+
+    def subheader(self, body, anchor=None):
+        self._results.subheader.append(body)
+
     def tabs(self, tabs):
         return [self] * len(tabs)
+
+    def text(self, body):
+        self._results.text.append(body)
 
     def text_area(
         self, label, value="", height=None, max_chars=None, key=None, help=None, on_change=None, args=None, kwargs=None, *, placeholder=None, disabled=False
@@ -214,6 +249,9 @@ class Mock:
 
     def title(self, body, anchor=None):
         self._results.title.append(body)
+
+    def warning(self, body):
+        self._results.warning.append(body)
 
     def write(self, *args, **kwargs):
         self._results.write += args
