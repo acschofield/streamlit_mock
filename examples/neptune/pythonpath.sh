@@ -1,0 +1,1 @@
+export PYTHONPATH=~/streamlit_mock/streamlit_mock/:~/source/python/launcher-client/bin/linux/launcher-client:~/source/python/neptune/src
