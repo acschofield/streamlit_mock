@@ -6,11 +6,14 @@ class DictNoDefault(addict.Dict):
         raise KeyError(key)
 
 
-class Mock:
+class Mock(object):
     def __init__(self):
         self.session_state = DictNoDefault()
         self._results = DictNoDefault()
+        self._results.aggrid = []
         self._results.altair_chart = []
+        self._results.changeable = []
+        self._results.clickable = []
         self._results.dataframe = []
         self._results.error = []
         self._results.form = []
@@ -34,6 +37,7 @@ class Mock:
 
     def _handle_changeable(self, label, key, initial_value, on_change, args, kwargs):
         self._results.widget_labels.append(label)
+        self._results.changeable.append(key)
         value = self.session_state.get(key, initial_value)
         if value != initial_value and on_change:
             optional_args = args if args else []
@@ -43,6 +47,7 @@ class Mock:
 
     def _handle_clickable(self, label, key, on_click, args, kwargs):
         self._results.widget_labels.append(label)
+        self._results.clickable.append(key)
         value = self.session_state.get(key, False)
         if value and on_click:
             optional_args = args if args else []

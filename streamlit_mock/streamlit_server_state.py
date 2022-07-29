@@ -1,6 +1,3 @@
-from collections import UserDict
-
-
 class ServerStateLock(dict):
     def __missing__(self, key):
         return self
@@ -12,7 +9,7 @@ class ServerStateLock(dict):
         pass
 
 
-class ServerState(UserDict):
+class ServerState(dict):
     def __missing__(self, key):
         return None
 

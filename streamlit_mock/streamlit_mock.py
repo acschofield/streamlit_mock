@@ -4,7 +4,7 @@ import importlib
 import re
 
 
-sys.path.insert(0, pathlib.Path(__file__).parent.resolve())
+sys.path.insert(0, str(pathlib.Path(__file__).parent.resolve()))
 import streamlit as st
 import impl.utils
 

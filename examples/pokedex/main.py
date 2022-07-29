@@ -22,6 +22,14 @@ pokemon_catolog = {
         "file": "charmander.png",
         "type": "Fire",
     },
+    "Charmeleon": {
+        "file": "charmeleon.png",
+        "type": "Fire",
+    },
+    "Charizard": {
+        "file": "charizard.png",
+        "type": "Fire Flying",
+    },
     "Lumberaxe": {
         "file": "lumberaxe.png",
         "type": "Grass",

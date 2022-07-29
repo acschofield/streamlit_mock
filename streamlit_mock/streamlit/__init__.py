@@ -1,8 +1,8 @@
-import streamlit.mock as mock
+import impl.mock
 import impl.utils
 
 
-_mock = mock.Mock()
+_mock = impl.mock.Mock()
 session_state = _mock.session_state
 
 altair_chart = _mock.altair_chart

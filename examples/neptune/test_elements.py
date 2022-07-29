@@ -5,10 +5,10 @@ import streamlit_mock
 import common
 
 
-def test_simple_login():
+def test_elements_initial_page_display():
     sm = streamlit_mock.StreamlitMock()
     session_state = sm.get_session_state()
+    session_state.select_page_radio = "🟪 Elements"
 
     results = common.run(sm)
-    assert re.search("test@example.com", results.markdown[1])
-    assert re.search("Neptune User Manual", " ".join(results.markdown))
+    print(results)
