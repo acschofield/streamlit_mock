@@ -8,7 +8,7 @@ def test_add():
     session_state.y_input = 4
     session_state.add_button = True
 
-    sm.run("main.py")
+    sm.run("main_simple_calculator.py")
 
     results = sm.get_results()
     assert results.title == ["A calculator"]
@@ -23,7 +23,7 @@ def test_subtract():
     session_state.y_input = 4
     session_state.subtract_button = True
 
-    sm.run("main.py")
+    sm.run("main_simple_calculator.py")
 
     results = sm.get_results()
     assert results.write == ["3 - 4 = -1"]

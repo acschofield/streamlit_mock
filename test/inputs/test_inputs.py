@@ -24,7 +24,7 @@ def test_input_widgets():
     session_state.camera_input = None
     session_state.color_picker = "#123456"
 
-    sm.run("main.py")
+    sm.run("main_inputs.py")
 
     results = sm.get_results()
 

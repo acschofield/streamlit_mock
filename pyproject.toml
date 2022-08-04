@@ -1,0 +1,28 @@
+[build-system]
+build-backend = "hatchling.build"
+requires = ["hatchling"]
+
+[project]
+authors = [
+  {name = "Andrew Schofield", email = "andrew@schofield.ch"},
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Operating System :: POSIX :: Linux",
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+  "addict",
+]
+description = "Mocks the stremlit interfaces for unit testing"
+license = {file = "LICENSE"}
+name = "streamlit_mock"
+readme = "README.md"
+requires-python = ">=3.8"
+version = "0.0.1"
+
+[project.urls]
+repository = "https://github.com/acschofield/streamlit_mock"
+

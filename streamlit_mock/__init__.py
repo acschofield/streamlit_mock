@@ -2,7 +2,8 @@ import sys
 import pathlib
 import importlib
 import re
-
+import io
+import os
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent.resolve()))
 import streamlit as st
@@ -10,6 +11,16 @@ import impl.utils
 
 
 imported = {}
+
+
+class UploadedFile(io.BytesIO):
+    def __init__(self, upload_filename, test_filename):
+        path = pathlib.Path(test_filename).parent.resolve() / pathlib.Path(upload_filename)
+        self.name = str(path)
+        with open(path, mode="rb") as f:
+            content = f.read()
+        super(UploadedFile, self).__init__(content)
+        pass
 
 
 class StreamlitMock:
@@ -41,3 +52,6 @@ class StreamlitMock:
 
     def get_results(self):
         return self.results
+
+    def set_uploaded_file(self, key, upload_filename, test_filename):
+        self.session_state[key] = UploadedFile(upload_filename, test_filename="./test.py")

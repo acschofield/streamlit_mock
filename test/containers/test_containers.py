@@ -4,9 +4,10 @@ import streamlit_mock
 def test_containers_and_layouts():
     sm = streamlit_mock.StreamlitMock()
     session_state = sm.get_session_state()
-    sm.run("main.py")
+    sm.run("main_container.py")
 
     results = sm.get_results()
+
     assert results.write == [
         "in expander #1",
         "in nested containers",

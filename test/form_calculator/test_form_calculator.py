@@ -8,7 +8,7 @@ def test_add():
     session_state.y_input = 4
     session_state["FormSubmitter:calculator_form-Add"] = True
 
-    sm.run("main.py")
+    sm.run("main_form_calculator.py")
 
     results = sm.get_results()
     assert results.form == ["calculator_form"]
@@ -22,7 +22,7 @@ def test_subtract():
     session_state.y_input = 4
     session_state["FormSubmitter:calculator_form-Subtract"] = True
 
-    sm.run("main.py")
+    sm.run("main_form_calculator.py")
 
     results = sm.get_results()
     assert results.form == ["calculator_form"]

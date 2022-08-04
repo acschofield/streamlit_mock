@@ -1,4 +1,5 @@
 import addict
+import contextlib
 
 
 class DictNoDefault(addict.Dict):
@@ -12,22 +13,47 @@ class Mock(object):
         self._results = DictNoDefault()
         self._results.aggrid = []
         self._results.altair_chart = []
+        self._results.altair_chart = []
+        self._results.area_chart = []
+        self._results.bar_chart = []
+        self._results.bokeh_chart = []
+        self._results.caption = []
         self._results.changeable = []
         self._results.clickable = []
+        self._results.code = []
         self._results.dataframe = []
+        self._results.download = []
+        self._results.element = []
         self._results.error = []
         self._results.form = []
+        self._results.graphviz_chart = []
         self._results.header = []
+        self._results.html = []
+        self._results.iframe = []
         self._results.image = []
         self._results.info = []
+        self._results.json = []
+        self._results.latex = []
+        self._results.line_chart = []
+        self._results.map = []
         self._results.markdown = []
+        self._results.plotly_chart = []
+        self._results.progress = []
+        self._results.pydeck_chart = []
+        self._results.pyplot = []
+        self._results.spinner = []
         self._results.subheader = []
         self._results.success = []
+        self._results.table = []
+        self._results.text = []
         self._results.title = []
+        self._results.vega_lite_chart = []
         self._results.warning = []
         self._results.widget_labels = []
-        self._results.text = []
         self._results.write = []
+
+    def altair_chart(self, altair_chart, use_container_width=False):
+        self._results.altair_chart.append(altair_chart)
 
     def __enter__(self):
         return self
@@ -60,6 +86,15 @@ class Mock(object):
     def altair_chart(self, altair_chart, use_container_width=False):
         self._results.altair_chart.append(altair_chart)
 
+    def area_chart(self, data=None, use_container_width=False):
+        self._results.area_chart.append(data)
+
+    def bar_chart(self, data=None, use_container_width=False):
+        self._results.bar_chart.append(data)
+
+    def bokeh_chart(self, figure, use_container_width=False):
+        self._results.bokeh_chart.append(figure)
+
     def button(
         self,
         label,
@@ -79,6 +114,12 @@ class Mock(object):
     def checkbox(self, label, value=False, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False):
         return self._handle_changeable(label, key, value, on_change, args, kwargs)
 
+    def caption(self, body, unsafe_allow_html=False):
+        self._results.caption.append(body)
+
+    def code(self, body, language="python"):
+        self._results.code.append(body)
+
     def color_picker(self, label, value=None, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False):
         return self._handle_changeable(label, key, value, on_change, args, kwargs)
 
@@ -96,6 +137,7 @@ class Mock(object):
         return self._handle_changeable(label, key, value, on_change, args, kwargs)
 
     def download_button(self, label, data, file_name=None, mime=None, key=None, help=None, on_click=None, args=None, kwargs=None, *, disabled=False):
+        self._results.download.append({"data": data, "file_name": file_name, "mime": mime, "key": key})
         return self._handle_clickable(label, key, on_click, args, kwargs)
 
     def empty(self):
@@ -126,6 +168,9 @@ class Mock(object):
         key = "FormSubmitter:" + self._results.form[-1] + "-" + label
         return self._handle_clickable(label, key, on_click, args, kwargs)
 
+    def graphviz_chart(self, figure_or_dot, use_container_width=False):
+        self._results.graphviz_chart.append(figure_or_dot)
+
     def header(self, body, anchor=None):
         self._results.header.append(body)
 
@@ -135,8 +180,23 @@ class Mock(object):
     def info(self, body):
         self._results.info.append(body)
 
+    def json(self, body, expanded=True):
+        self._results.json.append(body)
+
+    def latex(self, body):
+        self._results.latex.append(body)
+
+    def line_chart(self, data=None, use_container_width=False):
+        self._results.line_chart.append(data)
+
+    def map(self, data=None, zoom=None, use_container_width=True):
+        self._results.map.append(data)
+
     def markdown(self, body, unsafe_allow_html=False):
         self._results.markdown.append(body)
+
+    def progress(self, body):
+        self._results.progress.append(body)
 
     def multiselect(
         self,
@@ -171,6 +231,15 @@ class Mock(object):
         disabled=False,
     ):
         return self._handle_changeable(label, key, value, on_change, args, kwargs)
+
+    def plotly_chart(self, figure_or_data, use_container_width=False, sharing="streamlit", **kwargs):
+        self._results.plotly_chart.append(figure_or_data)
+
+    def pydeck_chart(self, pydeck_obj=None, use_container_width=False):
+        self._results.pydeck_chart.append(pydeck_obj)
+
+    def pyplot(self, fig=None, clear_figure=None, **kwargs):
+        self._results.pyplot.append(fig)
 
     def radio(
         self, label, options, index=0, format_func=None, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False, horizontal=False
@@ -214,11 +283,23 @@ class Mock(object):
     ):
         return self._handle_changeable(label, key, value, on_change, args, kwargs)
 
+    @contextlib.contextmanager
+    def spinner(self, text="In progress..."):
+        self._results.spinner.append(text)
+        resource = {}
+        try:
+            yield resource
+        except:
+            pass
+
     def success(self, body):
         self._results.success.append(body)
 
     def subheader(self, body, anchor=None):
         self._results.subheader.append(body)
+
+    def table(self, data=None):
+        self._results.table.append(data)
 
     def tabs(self, tabs):
         return [self] * len(tabs)
@@ -254,6 +335,9 @@ class Mock(object):
 
     def title(self, body, anchor=None):
         self._results.title.append(body)
+
+    def vega_lite_chart(self, data=None, spec=None, use_container_width=False, **kwargs):
+        self._results.vega_lite_chart.append(data)
 
     def warning(self, body):
         self._results.warning.append(body)
